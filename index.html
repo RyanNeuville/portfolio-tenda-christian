@@ -579,10 +579,6 @@
 </head>
 
 <body>
-  <div class="loader">
-    <div class="loader-spinner"></div>
-  </div>
-
   <div class="progress-container">
     <div class="progress-bar" id="progressBar"></div>
   </div>
@@ -914,13 +910,7 @@
         }
       });
 
-    // Animation de chargement
-    window.addEventListener("load", function () {
-      const loader = document.querySelector(".loader");
-      setTimeout(function () {
-        loader.classList.add("hidden");
-      }, 799);
-    });
+  
 
   </script>
 </body>
