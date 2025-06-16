@@ -7,7 +7,575 @@
   <title>CV - Tenda Christian</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* PALETTE COTTON */
+    :root {
+      /* Palette claire - Thème Cotton */
+      --cotton-light: #f8f4f0;
+      --cotton-primary: #af5731;
+      --cotton-secondary: #d59f7b;
+      --cotton-accent: #e5d3c5;
+      --cotton-text: #3d3d3d;
+      --cotton-muted: #8d786b;
+      --cotton-card: #ffffff;
+      --cotton-shadow: rgba(175, 87, 49, 0.1);
+
+      /* Palette sombre - Adaptation cotton */
+      --dark-cotton-bg: #1a1a1a;
+      --dark-cotton-card: #2d2d2d;
+      --dark-cotton-text: #e5d3c5;
+      --dark-cotton-muted: #a68a7d;
+      --dark-cotton-primary: #d59f7b;
+      --dark-cotton-accent: #8d786b;
+
+      /* Application des variables */
+      --primary: var(--cotton-primary);
+      --secondary: var(--cotton-secondary);
+      --accent: var(--cotton-accent);
+      --bg: var(--cotton-light);
+      --card: var(--cotton-card);
+      --text: var(--cotton-text);
+      --muted: var(--cotton-muted);
+      --light: #f5e9de;
+      --shadow: 0 4px 10px var(--cotton-shadow);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 15px;
+      font-size: 15px;
+      background-image: radial-gradient(circle at 10% 20%,
+          rgba(245, 233, 222, 0.5) 0px,
+          transparent 40px),
+        radial-gradient(circle at 90% 80%,
+          rgba(245, 233, 222, 0.4) 0px,
+          transparent 30px);
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* En-tête */
+    header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 15px;
+      position: relative;
+      background: linear-gradient(to right, var(--light), var(--bg));
+      border-radius: var(--radius);
+      padding: 25px 15px;
+      margin-top: 10px;
+      box-shadow: var(--shadow);
+      animation: headerFadeIn 1s ease-out;
+    }
+
+    @keyframes headerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--accent);
+      margin: 0 auto 15px;
+      box-shadow: var(--shadow);
+      background-color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-pic i {
+      font-size: 3rem;
+      color: var(--muted);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    header p {
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    /* Boutons d'action */
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--cotton-muted);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(175, 87, 49, 0.2);
+    }
+
+    .btn-secondary {
+      background: var(--light);
+      color: var(--primary);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-portfolio {
+      background: var(--cotton-secondary);
+    }
+
+    /* Cartes */
+    .card {
+      background: linear-gradient(to bottom, var(--card), var(--bg));
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--accent);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(175, 87, 49, 0.2);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .section-title i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Contact */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .contact-item i {
+      color: var(--primary);
+      min-width: 24px;
+      padding-top: 2px;
+      text-align: center;
+    }
+
+    .contact-item a {
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+      color: var(--primary);
+    }
+
+    /* Compétences */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .skill-item {
+      background: var(--light);
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .skill-item:hover {
+      transform: scale(1.03);
+      background: var(--accent);
+    }
+
+    .skill-item i {
+      color: var(--primary);
+      min-width: 20px;
+      text-align: center;
+    }
+
+    /* Expériences */
+    .experience-item {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px dashed var(--accent);
+    }
+
+    .experience-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .experience-date {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .experience-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .experience-company {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .job-details {
+      padding-left: 10px;
+    }
+
+    .job-details li {
+      margin-bottom: 8px;
+      padding-left: 15px;
+      position: relative;
+    }
+
+    .job-details li::before {
+      content: "•";
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    /* Formations */
+    .education-item {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px dashed var(--accent);
+    }
+
+    .education-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .education-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .education-date {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .education-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .education-school {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Centres d'intérêt */
+    .interests {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .interest-item {
+      background: var(--light);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .interest-item:hover {
+      transform: translateY(-3px);
+      background: var(--accent);
+    }
+
+    .interest-item i {
+      color: var(--primary);
+      min-width: 18px;
+      text-align: center;
+    }
+
+    /* Pied de page */
+    footer {
+      text-align: center;
+      padding: 25px 0 15px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px dashed var(--accent);
+      margin-top: 10px;
+    }
+
+    /* Mode sombre */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 100;
+      background: var(--card);
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    .dark-mode-toggle:hover {
+      transform: rotate(15deg);
+    }
+
+    body.dark-mode {
+      --primary: var(--dark-cotton-primary);
+      --secondary: var(--cotton-secondary);
+      --accent: var(--dark-cotton-accent);
+      --bg: var(--dark-cotton-bg);
+      --card: var(--dark-cotton-card);
+      --text: var(--dark-cotton-text);
+      --muted: var(--dark-cotton-muted);
+      --light: #3d3d3d;
+      background-image: radial-gradient(circle at 10% 20%,
+          rgba(45, 45, 45, 0.6) 0px,
+          transparent 40px),
+        radial-gradient(circle at 90% 80%,
+          rgba(45, 45, 45, 0.5) 0px,
+          transparent 30px);
+    }
+
+    /* Barre de progression */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 100;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+
+    /* Animation d'entrée */
+    .card {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Délais d'animation pour chaque carte */
+    .card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    .card:nth-child(7) {
+      animation-delay: 0.7s;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .experience-header,
+      .education-header {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        max-width: 100%;
+      }
+    }
+
+    /* Animation de chargement */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid var(--accent);
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    img {
+      bottom: -50px;
+      position: relative;
+      objectif-fill: contain;
+      left: -25px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -26,7 +594,7 @@
   <div class="container">
     <header>
       <div class="profile-pic">
-        <img src="images/profile.jpg" />
+        <img src="profile.jpg" />
       </div>
       <h1>Tenda Christian</h1>
       <p>Développeur Full Stack · React · Node.js · PHP</p>
@@ -239,7 +807,122 @@
     </footer>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Barre de progression
+    window.addEventListener("scroll", function () {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 99;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    });
+
+    // Mode sombre
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const darkModeIcon = darkModeToggle.querySelector("i");
+
+    darkModeToggle.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+
+      if (document.body.classList.contains("dark-mode")) {
+        darkModeIcon.classList.remove("fa-moon");
+        darkModeIcon.classList.add("fa-sun");
+      } else {
+        darkModeIcon.classList.remove("fa-sun");
+        darkModeIcon.classList.add("fa-moon");
+      }
+
+      // Sauvegarder la préférence
+      localStorage.setItem(
+        "darkMode",
+        document.body.classList.contains("dark-mode")
+      );
+    });
+
+    // Restaurer le mode sombre au chargement
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+      darkModeIcon.classList.remove("fa-moon");
+      darkModeIcon.classList.add("fa-sun");
+    }
+
+    // Fonctionnalités des boutons
+    document.getElementById("callBtn").addEventListener("click", function () {
+      window.location.href = "tel:+237678261698";
+    });
+
+    document.getElementById("emailBtn").addEventListener("click", function () {
+      window.location.href = "mailto:christiantendainfo2005@gmail.com";
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", function () {
+      alert("Téléchargement du CV en PDF...");
+      // Génération de PDF en JavaScript
+    });
+
+    document.getElementById("portfolioBtn").addEventListener("click", function () {
+      window.open("https://github.com/romaric-creator", "_blank");
+    });
+
+    // Animation au scroll
+    const observerOptions = {
+      threshold: -1.1,
+      rootMargin: "-1px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "0";
+          entry.target.style.transform = "translateY(-1)";
+        }
+      });
+    }, observerOptions);
+
+    // Observer toutes les cartes
+    document.querySelectorAll(".card").forEach((card) => {
+      observer.observe(card);
+    });
+
+    // Détection du thème système
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches &&
+      !localStorage.getItem("darkMode")
+    ) {
+      document.body.classList.add("dark-mode");
+      darkModeIcon.classList.remove("fa-moon");
+      darkModeIcon.classList.add("fa-sun");
+    }
+
+    // Écouter les changements de thème système
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        if (!localStorage.getItem("darkMode")) {
+          if (event.matches) {
+            document.body.classList.add("dark-mode");
+            darkModeIcon.classList.remove("fa-moon");
+            darkModeIcon.classList.add("fa-sun");
+          } else {
+            document.body.classList.remove("dark-mode");
+            darkModeIcon.classList.remove("fa-sun");
+            darkModeIcon.classList.add("fa-moon");
+          }
+        }
+      });
+
+    // Animation de chargement
+    window.addEventListener("load", function () {
+      const loader = document.querySelector(".loader");
+      setTimeout(function () {
+        loader.classList.add("hidden");
+      }, 799);
+    });
+
+  </script>
 </body>
 
 </html>
